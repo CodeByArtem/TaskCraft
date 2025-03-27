@@ -1,19 +1,23 @@
-"use client"
-import { useState } from 'react';
-import UserProfile from "@/components/profil/Profil";
-import RegisterForm from "@/components/registration/Registration";
+'use client';
 
+import React from 'react';
+import Image from 'next/image';
+import AuthSwitcher from '../../components/AuthSwitcher';
 
-export default function AuthPage() {
-    const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+const AuthPage: React.FC = () => {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <Image
+        src="/logo.png"
+        alt="Логотип"
+        width={200}
+        height={200}
+        priority
+        style={{ width: 'auto', height: 'auto' }}
+      />
+      <AuthSwitcher />
+    </div>
+  );
+};
 
-    return (
-        <div className="flex flex-col items-center">
-            {user ? (
-                <UserProfile user={user} />
-            ) : (
-                <RegisterForm onSuccessAction={() => setUser({ name: 'John Doe', email: 'john@example.com' })} />
-            )}
-        </div>
-    );
-}
+export default AuthPage;
