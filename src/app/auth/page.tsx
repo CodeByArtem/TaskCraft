@@ -1,19 +1,44 @@
-"use client"
-import { useState } from 'react';
-import UserProfile from "@/components/profil/Profil";
-import RegisterForm from "@/components/registration/Registration";
+// pages/login.tsx
+'use client';
 
+import React, { useState } from 'react';
+import { useLoginUser } from '@/hooks/auth/useLoginUser';
 
-export default function AuthPage() {
-    const [user, setUser] = useState<{ name: string; email: string } | null>(null);
+const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { mutate, isPending, error } = useLoginUser();
 
-    return (
-        <div className="flex flex-col items-center">
-            {user ? (
-                <UserProfile user={user} />
-            ) : (
-                <RegisterForm onSuccessAction={() => setUser({ name: 'John Doe', email: 'john@example.com' })} />
-            )}
-        </div>
-    );
-}
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    mutate({ email, password });
+  };
+
+  return (
+    <div>
+      <h1>Login</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit" disabled={isPending}>
+          {isPending ? 'Logging in...' : 'Login'}
+        </button>
+        {error && <div style={{ color: 'red' }}>{error.message}</div>}
+      </form>
+    </div>
+  );
+};
+
+export default LoginPage;
