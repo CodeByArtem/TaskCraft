@@ -1,9 +1,12 @@
 import axios from 'axios';
 
-// Использование переменной окружения для бэкенда
-const api = axios.create({
-  baseURL: "NEXT_PUBLIC_BACKEND_URL", // Используем URL из .env
-  withCredentials: true,
+const apiClient = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL, // теперь это должно работать
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
-export default api;
+console.log("API Base URL:", process.env.NEXT_PUBLIC_API_URL); // Для проверки
+
+export default apiClient;
