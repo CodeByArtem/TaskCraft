@@ -1,44 +1,16 @@
-// pages/login.tsx
 'use client';
 
-import React, { useState } from 'react';
-import { useLogin } from '@/hooks/auth/useLogin';
 
-const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { mutate, isPending, error } = useLogin();
+import React from 'react';
+import AuthSwitcher from '../../components/AuthSwitcher';
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    mutate({ email, password });
-  };
 
+const AuthPage: React.FC = () => {
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" disabled={isPending}>
-          {isPending ? 'Logging in...' : 'Login'}
-        </button>
-        {error && <div style={{ color: 'red' }}>{error.message}</div>}
-      </form>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+      <AuthSwitcher />
     </div>
   );
 };
 
-export default LoginPage;
+export default AuthPage;
