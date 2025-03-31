@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { api } from '../api';
+import  api  from '../api';
 import { useRefreshToken } from '../auth/auth';
 import { AxiosError } from 'axios';
 
