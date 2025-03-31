@@ -1,7 +1,9 @@
 'use client';
 
+
 import React from 'react';
 import AuthSwitcher from '../../components/AuthSwitcher';
+
 
 const AuthPage: React.FC = () => {
   return (
