@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import AuthSwitcher from '../../components/AuthSwitcher';
 
 const AuthPage: React.FC = () => {
