@@ -1,5 +1,7 @@
 import Providers from './providers';
-import '../app/globals.css';
+import "../styles/main.scss"
+import React from 'react';
+
 
 export const metadata = {
   title: 'Create Next App',

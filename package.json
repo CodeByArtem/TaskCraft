@@ -6,7 +6,8 @@
     "dev": "next dev -p 4000 --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sass": "sass --watch src/styles/main.scss:src/styles/main.css"
   },
   "dependencies": {
     "@hookform/resolvers": "^4.1.3",
