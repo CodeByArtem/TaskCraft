@@ -152,12 +152,21 @@ label {
 
 /**
   Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут fill со значением 'none' или начинается с 'url')
  */
-[fill] {
+:where([fill]:not([fill=none],
+[fill^=url])) {
   fill: currentColor;
 }
 
-[stroke] {
+/**
+  Приводим к единому цвету svg-элементы
+  (за исключением тех, у которых уже указан
+  атрибут stroke со значением 'none')
+ */
+:where([stroke]:not([stroke=none],
+[stroke^=url])) {
   stroke: currentColor;
 }
 
@@ -166,6 +175,14 @@ label {
  */
 svg * {
   transition-property: fill, stroke;
+}
+
+/**
+  Приведение рамок таблиц в классический 'collapse' вид
+ */
+:where(table) {
+  border-collapse: collapse;
+  border-color: currentColor;
 }
 
 /**

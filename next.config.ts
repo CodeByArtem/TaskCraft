@@ -1,11 +1,14 @@
 import type { NextConfig } from "next";
-module.exports = {
+
+const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_BACKEND_URL: process.env.NEXT_PUBLIC_BACKEND_URL,
   },
-};
-const nextConfig: NextConfig = {
-  /* config options here */
+  // Добавьте конфигурацию для SCSS
+  sassOptions: {
+    // Пример настройки путей, если нужно
+    includePaths: ["./styles"], // если у вас есть папка с глобальными стилями
+  },
 };
 
 export default nextConfig;
