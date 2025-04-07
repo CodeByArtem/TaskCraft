@@ -1,0 +1,99 @@
+$primary-color: #201d0b47;
+$input-background: #f5f5f5;
+$error-text: #801422;
+$label-text: #ead8d8;
+
+.emailForm {
+  position: fixed;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 200px;
+  padding: 30px;
+  border-radius: 40px;
+  border: 3px solid $input-background;
+
+  h2 {
+    line-height: normal;
+    color: white;
+    font-size: 48px;
+    margin: 0 0 24px 0;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    .inputGroup {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        line-height: normal;
+        font-size: 24px;
+        margin-bottom: 5px;
+        color: $label-text;
+      }
+
+      input {
+        width: 100%;
+        height: auto;
+        padding: 10px 15px;
+        border-radius: 40px;
+        border: none;
+        background-color: $input-background;
+        color: black;
+        font-size: 20px;
+        line-height: normal;
+        outline: none;
+      }
+
+      .error {
+        min-height: 20px;
+        color: $error-text;
+        font-size: 16px;
+        line-height: normal;
+      }
+    }
+  }
+
+  .link {
+    color: white;
+    line-height: normal;
+    text-decoration: none;
+  }
+
+  .actionButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+
+    button {
+      width: 200px;
+      height: 60px;
+      border-radius: 40px;
+      border: none;
+      background-color: $primary-color;
+      color: white;
+      font-size: 24px;
+      padding: 0;
+    }
+  }
+}
+
+.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  width: 700px;
+  margin: auto;
+  text-align: left;
+  color: white;
+  font-size: 42px;
+  line-height: normal;
+}

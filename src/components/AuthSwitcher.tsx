@@ -1,36 +1,37 @@
-import React, { useState } from 'react';
-import LoginForm from './login/LoginForm';
+import { useState } from 'react';
 import RegisterForm from './register/RegisterForm';
+import LoginForm from './login/LoginForm';
+import styles from './AuthSwitcher.module.scss';
+// import ResetPasswordForm from './resetPassword/ResetPasswordForm';
 
 const AuthSwitcher: React.FC = () => {
   const [isRegister, setIsRegister] = useState(false);
 
   return (
-    <div className="bg-white p-8 rounded-2xl shadow-lg w-96">
-      <p className="text-2xl font-extrabold mb-4 uppercase text-green-700">
-        Task Craft
-      </p>
-      <div className="flex justify-between mb-4">
+    <>
+      <div className={styles.authSwitcher}>
         <button
-          className={`text-lg font-bold ${
-            isRegister ? 'text-green-700' : 'text-gray-500'
-          }`}
+          className={`
+            ${styles.tabButton}
+            ${isRegister ? styles.active : styles.inactive}
+          `}
           onClick={() => setIsRegister(true)}
         >
-          Регистрация
+          Create Account
         </button>
         <button
-          className={`text-lg font-bold ${
-            !isRegister ? 'text-green-700' : 'text-gray-500'
-          }`}
+          className={`
+            ${styles.tabButton}
+            ${!isRegister ? styles.active : styles.inactive}
+          `}
           onClick={() => setIsRegister(false)}
         >
-          Вход
+          Log In
         </button>
       </div>
-
+      {/* <ResetPasswordForm /> */}
       {isRegister ? <RegisterForm /> : <LoginForm />}
-    </div>
+    </>
   );
 };
 
