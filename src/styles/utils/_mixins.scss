@@ -1,24 +1,28 @@
-@use 'sass:math';
-@use "functions" as *;
+@use 'sass:math'; // Подключение математических функций Sass
+@use "functions" as *; // Импорт всех функций из файла functions (например, rem(), fluid())
 
+// Миксин для адаптивного размера шрифта (использует функцию fluid)
 @mixin fluid-text($max: 48, $min: 16) {
   font-size: fluid($max, $min);
 }
 
+// Миксин для скрытия элемента (не отображается и не занимает место в DOM)
 @mixin hide {
   opacity: 0;
   visibility: hidden;
 }
 
+// Миксин для показа элемента, скрытого ранее
 @mixin show {
   opacity: 1;
   visibility: visible;
 }
 
+// Миксин для центрирования с flex. При $isInline = true — inline-flex, иначе обычный flex
 @mixin flex-center($isInline: false) {
   @if $isInline {
     display: inline-flex;
-  } @else  {
+  } @else {
     display: flex;
   }
 
@@ -26,18 +30,21 @@
   align-items: center;
 }
 
+// Миксин для абсолютного центрирования элемента по горизонтали и вертикали
 @mixin abs-center {
   position: absolute;
   top: 50%;
   left: 50%;
-  translate: -50% -50%;
+  translate: -50% -50%; // Центрирование без использования transform
 }
 
+// Миксин для создания квадрата с заданным размером
 @mixin square($size) {
   width: $size;
-  aspect-ratio: $size;
+  aspect-ratio: $size; // Поддерживает квадратные пропорции
 }
 
+// Миксин для скрытия элемента визуально, но с доступностью для скринридеров
 @mixin visually-hidden {
   position: absolute !important;
   width: 1px !important;

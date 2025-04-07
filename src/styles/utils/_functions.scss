@@ -1,25 +1,37 @@
 @use 'sass:math';
 
+// Функция для перевода пикселей в rem без указания единиц измерения
 @function rem($pixel) {
+  // Проверка: передано ли число без единиц измерения
   @if math.is-unitless($pixel) {
+    // Возвращает значение в rem (деление на 16 — базовый размер шрифта)
     @return math.div($pixel, 16) + rem;
   } @else {
+    // Если передан аргумент с единицами — выдаётся ошибка
     @error 'Не используйте единицы измерения при работе с функцией rem()! Передавайте аргументом только числа.'
   }
 }
 
+// Функция для создания адаптивного (fluid) размера через clamp()
 @function fluid($max: 100, $min: 10) {
+  // Ширина экрана, при которой достигается максимальное значение
   $maxViewportWidth: 1440;
+  // Ширина экрана, при которой достигается минимальное значение
   $minViewportWidth: 360;
 
+  // Преобразуем размеры в rem
   $maxSize: math.div($max, 16);
   $minSize: math.div($min, 16);
   $maxWidth: math.div($maxViewportWidth, 16);
   $minWidth: math.div($minViewportWidth, 16);
 
+  // Вычисляем наклон (slope) для формулы линейной интерполяции
   $slope: math.div(($maxSize - $minSize), ($maxWidth - $minWidth));
+  // Находим пересечение с осью Y (при 0 vw)
   $yAxisIntersection: -$minWidth * $slope + $minSize;
 
+  // Возвращаем выражение с clamp:
+  // минимальное значение, масштабируемое значение и максимальное значение
   @return clamp(
           #{$minSize * 1rem},
           #{$yAxisIntersection * 1rem} + #{$slope * 100vw},
