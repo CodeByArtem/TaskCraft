@@ -1,12 +1,12 @@
 import {
   updateCurrentUser,
-  UpdateUserData,
-  User,
+  UpdateCurrentUserData,
+  UpdateCurrentUserResponse,
 } from '@/api/currentUser/updateCurrentUser';
 import { useMutation } from '@tanstack/react-query';
 
 export const useUpdateCurrentUser = () => {
-  return useMutation<User, Error, UpdateUserData>({
+  return useMutation<UpdateCurrentUserResponse, Error, UpdateCurrentUserData>({
     mutationFn: updateCurrentUser,
   });
 };

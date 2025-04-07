@@ -9,7 +9,7 @@ export const googleAuth = async (): Promise<void> => {
     const response = await api.get<GoogleAuthResponse>('auth/google');
     window.location.href = response.data.authUrl;
   } catch (error) {
-    console.error('Oшибка авторизации через Google:', error);
+    console.error('Google Authorization error:', error);
     throw error;
   }
 };

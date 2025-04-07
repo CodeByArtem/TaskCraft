@@ -1,17 +1,22 @@
 import api from '../api';
 
-export interface User {
-  id: string;
-  username: string;
-  email: string;
-}
-export interface UpdateUserData {
+export interface UpdateCurrentUserData {
   username?: string;
   email?: string;
   password?: string;
 }
+export interface UpdateCurrentUserResponse {
+  id: string;
+  username: string;
+  email: string;
+}
 
-export const updateCurrentUser = async (data: UpdateUserData) => {
-  const response = await api.patch<User>('/users/me', data);
+export const updateCurrentUser = async (
+  data: UpdateCurrentUserData,
+): Promise<UpdateCurrentUserResponse> => {
+  const response = await api.patch<UpdateCurrentUserResponse>(
+    '/users/me',
+    data,
+  );
   return response.data;
 };

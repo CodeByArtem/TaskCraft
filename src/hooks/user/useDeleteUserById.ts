@@ -1,4 +1,8 @@
-import { deleteUser, DeleteData, DeleteResponse } from '@/api/users/deleteUser';
+import {
+  deleteUser,
+  DeleteData,
+  DeleteResponse,
+} from '@/api/user/deleteUserById';
 import { useMutation } from '@tanstack/react-query';
 
 export const useDeleteUser = () => {

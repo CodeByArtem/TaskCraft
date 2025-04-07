@@ -1,7 +1,12 @@
 import api from '@/api/api';
 
-export const deleteCurrentUser = async (): Promise<{ message: string }> => {
-  const response = await api.delete<{ message: string }>('/users/me');
-  console.log('User deleted successfully');
-  return response.data;
-};
+export interface DeleteCurrentUserResponse {
+  message: string;
+}
+
+export const deleteCurrentUser =
+  async (): Promise<DeleteCurrentUserResponse> => {
+    const response = await api.delete<DeleteCurrentUserResponse>('/users/me');
+    console.log('User deleted successfully');
+    return response.data;
+  };
