@@ -1,91 +1,94 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import Image from 'next/image';
+import Link from 'next/link';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '../../validation/validationSchema';
-import { PiEye, PiEyeClosed } from 'react-icons/pi';
-import GoogleAuthButton from '../GoogleAuthButton';
+import styles from './LoginForm.module.scss';
 
-interface LoginFormInputs {
+interface LoginFormValues {
   email: string;
   password: string;
 }
 
 const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  // const [message, setMessage] = useState('');
   const {
     register,
     handleSubmit,
     reset,
     trigger,
-    formState: { errors },
-  } = useForm<LoginFormInputs>({
+    formState: { errors, touchedFields },
+  } = useForm<LoginFormValues>({
     resolver: yupResolver(loginSchema),
     mode: 'onBlur',
   });
 
-  const onSubmit = async (data: LoginFormInputs) => {
-    console.log('Login data submitted:', data);
+  const onSubmit = async (data: LoginFormValues) => {
+    console.log('Register data:', data);
     reset();
   };
 
-  // const handleForgotPassword = async (email: string) => {
-  //   try {
-  //     await sendPasswordResetEmail(auth, email);
-  //     setMessage('Password reset email sent!');
-  //   } catch (error) {
-  //     setMessage('Error resetting password!');
-  //   }
-  // };
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      <input
-        {...register('email')}
-        placeholder="Email"
-        autoComplete="off"
-        onBlur={() => trigger('email')}
-        className="relative w-full p-3 text-sm leading-5 tracking-tight text-black bg-transparent border border-gray-400 rounded-xl outline-none focus:border-gray-600"
-      />
-      {errors.email && <p className="text-red-500">{errors.email.message}</p>}
+    <div className={styles.loginForm}>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.inputGroup}>
+          <label>Email</label>
+          <input
+            type="email"
+            {...register('email')}
+            placeholder="username@gmail.com"
+            autoComplete="off"
+            onBlur={() => trigger('email')}
+          />
+          <div className={styles.error}>
+            {touchedFields.email && errors.email?.message}
+            <p>{errors.email?.message}</p>
+          </div>
+        </div>
 
-      <div className="relative">
-        <input
-          type={showPassword ? 'text' : 'password'}
-          {...register('password')}
-          placeholder="Пароль"
-          autoComplete="off"
-          onBlur={() => trigger('email')}
-          className="relative w-full p-3 text-sm leading-5 tracking-tight text-black bg-transparent border border-gray-400 rounded-xl outline-none focus:border-gray-600"
-        />
-        <button
-          type="button"
-          className="absolute right-3 top-4"
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? <PiEye /> : <PiEyeClosed />}
-        </button>
-      </div>
-      {errors.password && (
-        <p className="text-red-500">{errors.password.message}</p>
-      )}
-
-      <button
-        type="submit"
-        className="bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl"
-      >
-        Войти
-      </button>
-
-      <GoogleAuthButton isRegister={false} />
-      <button
-        type="button"
-        // onClick={() => handleForgotPassword()}
-        className="text-blue-500 hover:text-blue-600"
-      >
-        Забыли пароль?
-      </button>
-    </form>
+        <div className={styles.inputGroup}>
+          <label>Password</label>
+          <div className={styles.relative}>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              {...register('password')}
+              placeholder="Password"
+              autoComplete="off"
+              onBlur={() => trigger('password')}
+            />
+            <button
+              type="button"
+              className={styles.passwordToggle}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              <Image
+                src={showPassword ? '/eye-show.svg' : '/eye-hide.svg'}
+                width={35}
+                height={35}
+                alt="Toggle Password"
+              />
+            </button>
+          </div>
+          <div className={styles.error}>
+            {touchedFields.password && errors.password?.message}
+            <p>{errors.password?.message}</p>
+          </div>
+        </div>
+        <div>
+          <Link className={styles.link} href="/auth/request-password-reset">
+            Forgot Password?
+          </Link>
+        </div>
+        <div className={styles.actionButtons}>
+          <button type="submit">Log In</button>
+          <button type="button" className={styles.googleButton}>
+            <Image src="/google.svg" width={40} height={40} alt="Google Icon" />
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

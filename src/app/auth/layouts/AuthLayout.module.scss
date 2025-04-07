@@ -1,0 +1,37 @@
+$background-color: #1a1a1a;
+$transition-duration: 1s;
+
+.authLayout {
+  position: relative;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: $background-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    object-fit: cover;
+    transition: opacity $transition-duration ease-in-out;
+  }
+
+  .logo {
+    position: fixed;
+    z-index: 1;
+    top: 70px;
+    left: 120px;
+  }
+
+  .content {
+    width: 100%;
+    max-width: 500px;
+    z-index: 10;
+    margin-top: 110px;
+  }
+}

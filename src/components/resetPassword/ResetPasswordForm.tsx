@@ -1,19 +1,17 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import Image from 'next/image';
 import Link from 'next/link';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { registerSchema } from '../../validation/validationSchema';
-import styles from './RegisterForm.module.scss';
+import { resetPasswordSchema } from '../../validation/validationSchema';
+import styles from './ResetPasswordForm.module.scss';
+import Image from 'next/image';
 
-interface RegisterFormValues {
-  name: string;
-  email: string;
+interface ResetPasswordFormValues {
   password: string;
   repeatPassword: string;
-  privacyPolicy: boolean;
 }
-const RegisterForm: React.FC = () => {
+
+const ResetPasswordForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -23,49 +21,20 @@ const RegisterForm: React.FC = () => {
     reset,
     trigger,
     formState: { errors, touchedFields },
-  } = useForm<RegisterFormValues>({
-    resolver: yupResolver(registerSchema),
+  } = useForm<ResetPasswordFormValues>({
+    resolver: yupResolver(resetPasswordSchema),
     mode: 'onBlur',
   });
 
-  const onSubmit = (data: RegisterFormValues) => {
+  const onSubmit = (data: ResetPasswordFormValues) => {
     console.log('Register data:', data);
     reset();
   };
 
   return (
-    <div className={styles.registerForm}>
-      <h2>Create Account</h2>
+    <div className={styles.resetPasswordForm}>
+      <h2>Password Reset</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.inputGroup}>
-          <label>Name</label>
-          <input
-            type="text"
-            {...register('name')}
-            autoComplete="off"
-            onBlur={() => trigger('name')}
-          />
-          <div className={styles.error}>
-            {touchedFields.name && errors.name?.message}
-            <p>{errors.name?.message}</p>
-          </div>
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label>Email</label>
-          <input
-            type="email"
-            {...register('email')}
-            placeholder="Email"
-            autoComplete="off"
-            onBlur={() => trigger('email')}
-          />
-          <div className={styles.error}>
-            {touchedFields.email && errors.email?.message}
-            <p>{errors.email?.message}</p>
-          </div>
-        </div>
-
         <div className={styles.inputGroup}>
           <label>Password</label>
           <div className={styles.relative}>
@@ -123,33 +92,17 @@ const RegisterForm: React.FC = () => {
             <p>{errors.repeatPassword?.message}</p>
           </div>
         </div>
-        <div className={styles.checkboxGroup}>
-          <label className={styles.checkboxLabel}>
-            <input type="checkbox" {...register('privacyPolicy')} />
-            <span>
-              I agree to the{' '}
-              <Link href="/terms-service" rel="noopener noreferrer">
-                [Terms of Service]
-              </Link>{' '}
-              and{' '}
-              <Link href="/privacy-policy" rel="noopener noreferrer">
-                [Privacy Policy]
-              </Link>
-            </span>
-          </label>
-          <div className={styles.error}>
-            {touchedFields.privacyPolicy && errors.privacyPolicy?.message}
-          </div>
+        <div>
+          <Link className={styles.link} href="/auth">
+            Already have an account?
+          </Link>
         </div>
-        <div className={styles.actionButtons}>
-          <button type="submit">Create Account</button>
-          <button type="button" className={styles.googleButton}>
-            <Image src="/google.svg" width={40} height={40} alt="Google Icon" />
-          </button>
+        <div className={styles.actionButton}>
+          <button type="submit">Reset Password</button>
         </div>
       </form>
     </div>
   );
 };
 
-export default RegisterForm;
+export default ResetPasswordForm;

@@ -1,0 +1,31 @@
+// Colors
+$primary-text: #918974;
+$secondary-text: white;
+$border-color: #eebebe;
+
+.authSwitcher {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 20px;
+
+  .tabButton {
+    background-color: transparent;
+    border: none;
+    font-size: 36px;
+    line-height: normal;
+
+    &.active {
+      color: $primary-text;
+      font-weight: 700;
+      border-bottom: 3px solid $border-color;
+    }
+
+    &.inactive {
+      color: $secondary-text;
+      font-weight: 400;
+    }
+  }
+}
