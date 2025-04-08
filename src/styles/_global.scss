@@ -1,5 +1,13 @@
 @use "utils" as *;
+@use "base";
+@use "typography";
+@use "variables";
 
 
 
-
+.container {
+  width: 100%;
+  max-width: rem(1400); // Перевод пикселей в rem
+  margin-inline: auto;
+  padding-inline: fluid(32, 16); // Использование fluid для адаптивного padding
+}

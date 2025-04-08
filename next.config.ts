@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   // Добавьте конфигурацию для SCSS
   sassOptions: {
     // Пример настройки путей, если нужно
-    includePaths: ["./styles"], // если у вас есть папка с глобальными стилями
+
   },
 };
 

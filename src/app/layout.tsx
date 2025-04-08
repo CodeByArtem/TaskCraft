@@ -1,5 +1,5 @@
 import Providers from './providers';
-import "../styles/main.scss"
+import "../styles/main.scss";
 import React from 'react';
 
 

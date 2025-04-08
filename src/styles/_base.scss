@@ -15,13 +15,17 @@
   padding-left: 0;
 }
 
-
+/**
+  Убираем внешние отступы body и двум другим тегам,
+  у которых есть атрибут class
+ */
 body,
 :where(blockquote, figure):where([class]) {
   margin: 0;
-  list-style: none;
 }
-
+a {
+  text-decoration: none;
+}
 /**
   Убираем внешние отступы вертикали нужным тегам,
   у которых есть атрибут class
@@ -203,4 +207,5 @@ svg * {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
 }
