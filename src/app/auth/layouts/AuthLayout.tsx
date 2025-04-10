@@ -26,14 +26,16 @@ const AuthLayout = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <div className={styles.authLayout} onClick={handleActivity}>
-      <div className={styles.background}>
-        <Image src={background} alt="Background" fill />
+    <div className="container">
+      <div className={styles.authLayout} onClick={handleActivity}>
+        <div className={styles.background}>
+          <Image src={background} alt="Background" fill />
+        </div>
+        <div className={styles.logo}>
+          <Image src="/logo.svg" width={250} height={40} alt="Logo" priority />
+        </div>
+        <div className={styles.content}>{children}</div>
       </div>
-      <div className={styles.logo}>
-        <Image src="/logo.svg" width={250} height={40} alt="Logo" />
-      </div>
-      <div className={styles.content}>{children}</div>
     </div>
   );
 };

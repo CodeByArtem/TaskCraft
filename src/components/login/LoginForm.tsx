@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import Link from 'next/link';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '../../validation/validationSchema';
+import { useLogin } from '@/hooks/auth/useLogin';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styles from './LoginForm.module.scss';
+import { ToastCloseButton } from '../toast/ToastCloseButton';
 
 interface LoginFormValues {
   email: string;
@@ -13,6 +17,8 @@ interface LoginFormValues {
 
 const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { mutate, error } = useLogin();
+
   const {
     register,
     handleSubmit,
@@ -25,12 +31,46 @@ const LoginForm: React.FC = () => {
   });
 
   const onSubmit = async (data: LoginFormValues) => {
-    console.log('Register data:', data);
-    reset();
+    mutate(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        onSuccess: () => {
+          toast.success('Log in is successful!');
+          reset();
+        },
+      },
+    );
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error('Error: wrong password or email! Please try again');
+    }
+  }, [error]);
 
   return (
     <div className={styles.loginForm}>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        closeOnClick
+        pauseOnHover
+        draggable
+        toastClassName={(context) =>
+          context?.type === 'success'
+            ? styles.toastSuccess
+            : context?.type === 'error'
+            ? styles.toastError
+            : styles.toastDefault
+        }
+        className={styles.toastBody}
+        closeButton={<ToastCloseButton />}
+      />
+
       <h2>Login</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputGroup}>
@@ -81,6 +121,7 @@ const LoginForm: React.FC = () => {
             Forgot Password?
           </Link>
         </div>
+
         <div className={styles.actionButtons}>
           <button type="submit">Log In</button>
           <button type="button" className={styles.googleButton}>

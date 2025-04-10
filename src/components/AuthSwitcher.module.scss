@@ -1,3 +1,5 @@
+@use '../styles/utils/' as *;
+
 // Colors
 $primary-text: #918974;
 $secondary-text: white;
@@ -5,22 +7,22 @@ $border-color: #eebebe;
 
 .authSwitcher {
   width: 100%;
-  max-width: 500px;
+  max-width: rem(500);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 20px;
+  padding-bottom: rem(20);
 
   .tabButton {
     background-color: transparent;
     border: none;
-    font-size: 36px;
+    font-size: rem(36);
     line-height: normal;
 
     &.active {
       color: $primary-text;
       font-weight: 700;
-      border-bottom: 3px solid $border-color;
+      border-bottom: rem(3) solid $border-color;
     }
 
     &.inactive {

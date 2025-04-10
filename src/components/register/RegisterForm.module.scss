@@ -1,3 +1,5 @@
+@use '../../styles/utils/' as *;
+
 $primary-color: #201d0b47;
 $input-background: #f5f5f5;
 $error-text: #801422;
@@ -5,19 +7,57 @@ $label-text: #ead8d8;
 
 .registerForm {
   width: 100%;
-  max-width: 500px;
+  max-width: rem(500);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px;
-  border-radius: 40px;
-  border: 3px solid $input-background;
+  padding: rem(30);
+  border-radius: rem(40);
+  border: rem(3) solid $input-background;
+
+  .toastSuccess {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: rem(6) solid #28a745;
+    padding: rem(12) rem(16);
+    border-radius: rem(8);
+    box-shadow: 0 rem(2) rem(8) rgba(0, 128, 0, 0.15);
+    font-weight: 500;
+  }
+
+  .toastError {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: rem(6) solid #dc3545;
+    padding: rem(12) rem(16);
+    border-radius: rem(8);
+    box-shadow: 0 rem(2) rem(8) rgba(255, 0, 0, 0.15);
+    font-weight: 500;
+  }
+
+  .toastDefault {
+    background-color: #f1f1f1;
+    color: #333;
+    border-left: rem(6) solid #999;
+    padding: rem(12) rem(16);
+    border-radius: rem(8);
+    box-shadow: 0 rem(2) rem(8) rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+  }
+
+  .toastBody {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: rem(10);
+    width: 100%;
+  }
 
   h2 {
     line-height: normal;
     color: white;
-    font-size: 48px;
-    margin: 0 0 24px 0;
+    font-size: rem(48);
+    margin: 0 0 rem(24) 0;
   }
 
   form {
@@ -30,20 +70,20 @@ $label-text: #ead8d8;
 
       label {
         line-height: normal;
-        font-size: 24px;
-        margin-bottom: 5px;
+        font-size: rem(24);
+        margin-bottom: rem(5);
         color: $label-text;
       }
 
       input {
         width: 100%;
         height: auto;
-        padding: 10px 15px;
-        border-radius: 40px;
+        padding: rem(10) rem(15);
+        border-radius: rem(40);
         border: none;
         background-color: $input-background;
         color: black;
-        font-size: 20px;
+        font-size: rem(20);
         line-height: normal;
         outline: none;
       }
@@ -55,7 +95,7 @@ $label-text: #ead8d8;
       .passwordToggle {
         position: absolute;
         top: 50%;
-        right: 15px;
+        right: rem(15);
         transform: translateY(-50%);
         border: none;
         padding: 0;
@@ -63,9 +103,9 @@ $label-text: #ead8d8;
     }
 
     .error {
-      min-height: 20px;
+      min-height: rem(20);
       color: $error-text;
-      font-size: 16px;
+      font-size: rem(16);
       line-height: normal;
     }
     .checkboxGroup {
@@ -75,7 +115,7 @@ $label-text: #ead8d8;
     .checkboxLabel {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: rem(8);
       border: none;
 
       input {
@@ -90,18 +130,21 @@ $label-text: #ead8d8;
 
     .actionButtons {
       display: flex;
-      gap: 10px;
-      margin-top: 15px;
+      gap: rem(10);
 
       button {
-        width: 200px;
-        height: 60px;
-        border-radius: 40px;
+        width: rem(200);
+        height: rem(60);
+        border-radius: rem(40);
         border: none;
         background-color: $primary-color;
         color: white;
-        font-size: 30px;
+        font-size: rem(30);
         padding: 0;
+
+        &:active {
+          background-color: #65706b;
+        }
 
         &.googleButton {
           display: flex;

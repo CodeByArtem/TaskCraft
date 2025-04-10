@@ -1,3 +1,5 @@
+@use '../../styles/utils/' as *;
+
 $primary-color: #201d0b47;
 $input-background: #f5f5f5;
 $error-text: #801422;
@@ -6,21 +8,21 @@ $label-text: #ead8d8;
 .emailForm {
   position: fixed;
   width: 100%;
-  max-width: 500px;
+  max-width: rem(500);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 200px;
-  padding: 30px;
-  border-radius: 40px;
-  border: 3px solid $input-background;
+  margin-top: rem(200);
+  padding: rem(30);
+  border-radius: rem(40);
+  border: rem(3) solid $input-background;
 
   h2 {
     line-height: normal;
     color: white;
-    font-size: 48px;
-    margin: 0 0 24px 0;
+    font-size: rem(48);
+    margin: 0 0 rem(24) 0;
   }
 
   form {
@@ -34,28 +36,28 @@ $label-text: #ead8d8;
 
       label {
         line-height: normal;
-        font-size: 24px;
-        margin-bottom: 5px;
+        font-size: rem(24);
+        margin-bottom: rem(5);
         color: $label-text;
       }
 
       input {
         width: 100%;
         height: auto;
-        padding: 10px 15px;
-        border-radius: 40px;
+        padding: rem(10) rem(15);
+        border-radius: rem(40);
         border: none;
         background-color: $input-background;
         color: black;
-        font-size: 20px;
+        font-size: rem(20);
         line-height: normal;
         outline: none;
       }
 
       .error {
-        min-height: 20px;
+        min-height: rem(20);
         color: $error-text;
-        font-size: 16px;
+        font-size: rem(16);
         line-height: normal;
       }
     }
@@ -70,16 +72,16 @@ $label-text: #ead8d8;
   .actionButton {
     display: flex;
     justify-content: center;
-    margin-top: 15px;
+    margin-top: rem(15);
 
     button {
-      width: 200px;
-      height: 60px;
-      border-radius: 40px;
+      width: rem(200);
+      height: rem(60);
+      border-radius: rem(40);
       border: none;
       background-color: $primary-color;
       color: white;
-      font-size: 24px;
+      font-size: rem(24);
       padding: 0;
     }
   }
@@ -89,11 +91,11 @@ $label-text: #ead8d8;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 500px;
-  width: 700px;
+  min-height: rem(500);
+  width: rem(700);
   margin: auto;
   text-align: left;
   color: white;
-  font-size: 42px;
+  font-size: rem(42);
   line-height: normal;
 }
