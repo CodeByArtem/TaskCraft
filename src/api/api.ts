@@ -1,8 +1,8 @@
 import axios from 'axios';
-
+import {API_BASE_URL} from '@/config/api';
 // Использование переменной окружения для бэкенда
 const api = axios.create({
-  baseURL: "NEXT_PUBLIC_BACKEND_URL", // Используем URL из .env
+  baseURL: API_BASE_URL, // Используем URL из .env
   withCredentials: true,
 });
 
