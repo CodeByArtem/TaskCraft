@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '../../validation/validationSchema';
 import { useLogin } from '@/hooks/auth/useLogin';
-import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 import styles from './LoginForm.module.scss';
 import { ToastCloseButton } from '../toast/ToastCloseButton';
 
