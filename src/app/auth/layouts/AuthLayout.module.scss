@@ -1,3 +1,5 @@
+@use '../../../styles/utils/' as *;
+
 $background-color: #1a1a1a;
 $transition-duration: 1s;
 
@@ -24,14 +26,14 @@ $transition-duration: 1s;
   .logo {
     position: fixed;
     z-index: 1;
-    top: 70px;
-    left: 120px;
+    top: rem(70);
+    left: rem(120);
   }
 
   .content {
     width: 100%;
-    max-width: 500px;
+    max-width: rem(500);
     z-index: 10;
-    margin-top: 110px;
+    margin-top: rem(110);
   }
 }

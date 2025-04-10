@@ -1,7 +1,7 @@
 import * as yup from 'yup';
 
 export const registerSchema = yup.object().shape({
-  name: yup
+  username: yup
     .string()
     .min(3, 'Name must be 3 characters or more')
     .required('Required'),
@@ -12,13 +12,13 @@ export const registerSchema = yup.object().shape({
     .required('Required'),
   password: yup
     .string()
-    .min(10, 'Password must be at least 10 characters')
+    .min(6, 'Password must be at least 6 characters')
     .required('Required'),
-  repeatPassword: yup
+  confirmPassword: yup
     .string()
     .nullable()
     .oneOf([yup.ref('password'), null], 'Passwords must match')
-    .required('Please repeat your password'),
+    .required('Please confirm your password'),
   privacyPolicy: yup
     .boolean()
     .oneOf([true], 'You must accept the privacy policy'),
@@ -32,7 +32,7 @@ export const loginSchema = yup.object().shape({
     .required('Required'),
   password: yup
     .string()
-    .min(10, 'Password must be at least 10 characters')
+    .min(6, 'Password must be at least 6 characters')
     .required('Required'),
 });
 
@@ -41,7 +41,7 @@ export const resetPasswordSchema = yup.object().shape({
     .string()
     .min(10, 'Password must be at least 10 characters')
     .required('Required'),
-  repeatPassword: yup
+  confirmPassword: yup
     .string()
     .oneOf([yup.ref('password')], 'Passwords must match')
     .required('Please confirm your password'),

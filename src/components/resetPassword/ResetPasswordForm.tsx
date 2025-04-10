@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 interface ResetPasswordFormValues {
   password: string;
-  repeatPassword: string;
+  confirmPassword: string;
 }
 
 const ResetPasswordForm: React.FC = () => {
@@ -69,10 +69,10 @@ const ResetPasswordForm: React.FC = () => {
           <div className={styles.relative}>
             <input
               type={showConfirmPassword ? 'text' : 'password'}
-              {...register('repeatPassword')}
+              {...register('confirmPassword')}
               placeholder="Confirm Password"
               autoComplete="off"
-              onBlur={() => trigger('repeatPassword')}
+              onBlur={() => trigger('confirmPassword')}
             />
             <button
               type="button"
@@ -88,8 +88,8 @@ const ResetPasswordForm: React.FC = () => {
             </button>
           </div>
           <div className={styles.error}>
-            {touchedFields.repeatPassword && errors.repeatPassword?.message}
-            <p>{errors.repeatPassword?.message}</p>
+            {touchedFields.confirmPassword && errors.confirmPassword?.message}
+            <p>{errors.confirmPassword?.message}</p>
           </div>
         </div>
         <div>

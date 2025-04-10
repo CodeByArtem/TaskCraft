@@ -1,21 +1,32 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Image from 'next/image';
 import Link from 'next/link';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { registerSchema } from '../../validation/validationSchema';
+import { useRegister } from '@/hooks/auth/useRegister';
+import { useGoogleAuth } from '@/hooks/auth/useGoogleAuth';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import styles from './RegisterForm.module.scss';
+import { ToastCloseButton } from '../toast/ToastCloseButton';
 
 interface RegisterFormValues {
-  name: string;
+  username: string;
   email: string;
   password: string;
-  repeatPassword: string;
-  privacyPolicy: boolean;
+  confirmPassword: string;
+  privacyPolicy?: boolean;
 }
 const RegisterForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const { mutate, error } = useRegister();
+  const {
+    mutate: googleSignIn,
+    isPending: googlePending,
+    error: googleError,
+  } = useGoogleAuth();
 
   const {
     register,
@@ -29,25 +40,66 @@ const RegisterForm: React.FC = () => {
   });
 
   const onSubmit = (data: RegisterFormValues) => {
-    console.log('Register data:', data);
-    reset();
+    mutate(
+      {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+        confirmPassword: data.confirmPassword,
+      },
+      {
+        onSuccess: () => {
+          toast.success('Registration completed!');
+          reset();
+        },
+      },
+    );
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error('Something went wrong!');
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (googleError) {
+      toast.error('Google login failed!');
+    }
+  }, [googleError]);
 
   return (
     <div className={styles.registerForm}>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar
+        closeOnClick
+        pauseOnHover
+        draggable
+        toastClassName={(context) =>
+          context?.type === 'success'
+            ? styles.toastSuccess
+            : context?.type === 'error'
+            ? styles.toastError
+            : styles.toastDefault
+        }
+        className={styles.toastBody}
+        closeButton={<ToastCloseButton />}
+      />
       <h2>Create Account</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputGroup}>
           <label>Name</label>
           <input
             type="text"
-            {...register('name')}
+            {...register('username')}
             autoComplete="off"
-            onBlur={() => trigger('name')}
+            onBlur={() => trigger('username')}
           />
           <div className={styles.error}>
-            {touchedFields.name && errors.name?.message}
-            <p>{errors.name?.message}</p>
+            {touchedFields.username && errors.username?.message}
+            <p>{errors.username?.message}</p>
           </div>
         </div>
 
@@ -100,10 +152,10 @@ const RegisterForm: React.FC = () => {
           <div className={styles.relative}>
             <input
               type={showConfirmPassword ? 'text' : 'password'}
-              {...register('repeatPassword')}
+              {...register('confirmPassword')}
               placeholder="Confirm Password"
               autoComplete="off"
-              onBlur={() => trigger('repeatPassword')}
+              onBlur={() => trigger('confirmPassword')}
             />
             <button
               type="button"
@@ -119,8 +171,8 @@ const RegisterForm: React.FC = () => {
             </button>
           </div>
           <div className={styles.error}>
-            {touchedFields.repeatPassword && errors.repeatPassword?.message}
-            <p>{errors.repeatPassword?.message}</p>
+            {touchedFields.confirmPassword && errors.confirmPassword?.message}
+            <p>{errors.confirmPassword?.message}</p>
           </div>
         </div>
         <div className={styles.checkboxGroup}>
@@ -141,9 +193,15 @@ const RegisterForm: React.FC = () => {
             {touchedFields.privacyPolicy && errors.privacyPolicy?.message}
           </div>
         </div>
+
         <div className={styles.actionButtons}>
           <button type="submit">Create Account</button>
-          <button type="button" className={styles.googleButton}>
+          <button
+            type="button"
+            className={styles.googleButton}
+            onClick={() => googleSignIn()}
+            disabled={googlePending}
+          >
             <Image src="/google.svg" width={40} height={40} alt="Google Icon" />
           </button>
         </div>
