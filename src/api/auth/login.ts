@@ -6,11 +6,7 @@ export interface LoginCredentials {
 }
 
 export interface LoginResponse {
-  token: string;
-  user: {
-    id: string;
-    email: string;
-  };
+  message: string;
 }
 
 export const loginUser = async (

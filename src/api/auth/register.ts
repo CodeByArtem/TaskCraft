@@ -7,7 +7,20 @@ export interface RegisterData {
   confirmPassword: string;
 }
 export interface RegisterResponse {
-  user: { id: string; username: string; email: string };
+  user: {
+    id: string;
+    username: string;
+    email: string;
+    isActive: boolean;
+    createdAt: string;
+    updatedAt: string;
+    googleId: string | null;
+    lastLogin: string | null;
+    notifications: boolean;
+    passwordResetToken: string | null;
+    refreshToken: string | null;
+    theme: 'light' | 'dark'; // если только два варианта;
+  };
 }
 
 export const registerUser = async (

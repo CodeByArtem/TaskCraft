@@ -1,7 +1,7 @@
 import {
   deleteCurrentUser,
   DeleteCurrentUserResponse,
-} from '@/api/currentUser/deleteCurrentUser';
+} from '@/api/users/currentUser/deleteCurrentUser';
 import { useMutation } from '@tanstack/react-query';
 
 export const useDeleteCurrentUser = () => {
