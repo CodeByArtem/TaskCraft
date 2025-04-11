@@ -1,3 +1,4 @@
+import { Board } from '@/types/board';
 import api from '../api';
 
 export interface CreateBoardData {
@@ -5,19 +6,9 @@ export interface CreateBoardData {
   description: string;
   userId: string;
 }
-export interface CreateBoardResponse {
-  id: string;
-  title: string;
-  description: string;
-  userId: string;
-  createdAt?: string;
-  updatedAt?: string;
-}
 
-export const createBoard = async (
-  data: CreateBoardData,
-): Promise<CreateBoardResponse> => {
-  const response = await api.post<CreateBoardResponse>('/boards', data);
+export const createBoard = async (data: CreateBoardData): Promise<Board> => {
+  const response = await api.post<Board>('/boards', data);
   console.log('Board created:', response.data);
   return response.data;
 };

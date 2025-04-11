@@ -1,3 +1,4 @@
+import { Task } from '@/types/task';
 import api from '../api';
 
 export interface CreateTaskData {
@@ -5,19 +6,9 @@ export interface CreateTaskData {
   description: string;
   columnId: string;
 }
-export interface CreateTaskResponse {
-  id: string;
-  title: string;
-  description: string;
-  columnId: string;
-  createdAt?: string;
-  updatedAt?: string;
-}
 
-export const createTask = async (
-  data: CreateTaskData,
-): Promise<CreateTaskResponse> => {
-  const response = await api.post<CreateTaskResponse>('/tasks', data);
+export const createTask = async (data: CreateTaskData): Promise<Task> => {
+  const response = await api.post<Task>('/tasks', data);
   console.log('Task created:', response.data);
   return response.data;
 };
