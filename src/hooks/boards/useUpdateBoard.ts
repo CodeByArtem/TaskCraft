@@ -1,5 +1,6 @@
 import { updateBoard, UpdateBoardData } from '@/api/boards/updateBoard';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
 
 export const useUpdateBoard = () => {
   const queryClient = useQueryClient();
@@ -9,6 +10,10 @@ export const useUpdateBoard = () => {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['board', variables.id] });
       queryClient.invalidateQueries({ queryKey: ['boards'] });
+      toast.success('Board updated!');
+    },
+    onError: () => {
+      toast.error('Error updating board');
     },
   });
 };
