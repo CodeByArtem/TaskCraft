@@ -12,9 +12,9 @@ export const updateBoard = async ({
   title,
   description,
 }: UpdateBoardData): Promise<Board> => {
-  const response = api.put<Board>(`/boards/${id}`, {
+  const response = await api.put<Board>(`/boards/${id}`, {
     title,
     description,
   });
-  return (await response).data;
+  return response.data;
 };
