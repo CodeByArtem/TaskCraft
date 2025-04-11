@@ -2,7 +2,7 @@ import {
   updateUser,
   UpdateUserData,
   UpdateUserParams,
-} from '@/api/user/updateUserById';
+} from '@/api/users/user/updateUserById';
 import { useMutation } from '@tanstack/react-query';
 
 export const useUpdateUser = () => {
